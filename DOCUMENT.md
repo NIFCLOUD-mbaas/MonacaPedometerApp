@@ -699,13 +699,7 @@ layout: false
 layout: true
 class: center, middle, inverse_sub
 ---
-## 参考
-* PodファイルのInstall方法
-    1. ターミナルを開き
-    2. cd <project> フォルダ
-    3. `pod install`で実施 
-    4. `<app>.xcworkspace`を開き
----
+
 layout: false
 
 ### 完全版について
