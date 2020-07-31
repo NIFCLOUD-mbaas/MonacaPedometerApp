@@ -146,12 +146,11 @@ https://ja.monaca.io/
 #### サンプルプロジェクトのインポート
 
 * プロジェクトをインポートします
-  * 下記記リンク先ページを開き「インポート」をクリックします
-
-.center[
-.size_large_18[**https://goo.gl/Yvzf2q** ]<br><br>
-<img src="readme-img/Monaca準備2.png" alt="Monaca準備2" width="250px">
-]
+  * [Monaca](https://ja.monaca.io) にログインし、「インポート」をクリックします
+  * 「インポート方法」で「URL」をクリックします
+.center[<img src="readme-img/006_01.png" alt="import_project" width="400px">]
+  * 下記URLをコピーして貼り付けます  
+  https://github.com/NIFCLOUD-mbaas/MonacaPedometerApp.git
 
 ---
 ### 3. Monaca プロジェクトの作成
@@ -330,14 +329,14 @@ user.signUpByAccount()
 ```js
 // ログイン
 ncmb.User.login(email, password)
-         .then(function(user){
-           /* ログイン成功時の処理 */
-           $('body').trigger('loginComplete');
-         })
-         .catch(function(err){
-           /* ログイン失敗時の処理 */
-           $('body').trigger('ncmbError', [err, 'login']);
-         });
+          .then(function(user){
+            /* ログイン成功時の処理 */
+            $('body').trigger('loginComplete');
+          })
+          .catch(function(err){
+            /* ログイン失敗時の処理 */
+            $('body').trigger('ncmbError', [err, 'login']);
+          });
 ```
 * `.login(userName, password)` ：ユーザー名とパスワードを設定してログイン処理を実行
 
@@ -479,9 +478,10 @@ var Steps = ncmb.DataStore('Steps');
 var steps = new Steps();
 // 値を設定
 steps.set('objectId', data.objectId)
-     .set('date', data.date)
-     .set('count', data.count)
-     .set('acl', acl);
+      .set('date', data.date)
+      .set('count', data.count)
+      .set('acl', acl);
+
 // save/updateメソッドでクラウド上へ保存/更新する
 (!steps.objectId ? steps.save() : steps.update()) // 三項演算子 (条件 ? 真:偽)
   .then(function(obj){
@@ -526,25 +526,25 @@ steps.set('objectId', data.objectId)
 ```js
 // 今日の歩数をクラウドから取得してPedometerに設定
 Steps.equalTo('date', today)
-     .fetchAll()
-     .then(function(objects){
-       /* 検索成功時の処理 */
-       if (objects.length > 0) {
-         var currentSteps = {
-           count: objects[0].get('count'),
-           objectId: objects[0].get('objectId'),
-           date: objects[0].get('date')
-         };
-         // 歩数計に値を設定
-         Pedometer.setSteps(currentSteps);
-       }
-       // 歩数計更新
-       Pedometer.refresh();
-     })
-     .catch(function(err){
-       /* 検索失敗時の処理 */
-       $('body').trigger('ncmbError', [err, 'loginComplete']);
-     });
+      .fetchAll()
+      .then(function(objects){
+        /* 検索成功時の処理 */
+        if (objects.length > 0) {
+          var currentSteps = {
+            count: objects[0].get('count'),
+            objectId: objects[0].get('objectId'),
+            date: objects[0].get('date')
+          };
+          // 歩数計に値を設定
+          Pedometer.setSteps(currentSteps);
+        }
+        // 歩数計更新
+        Pedometer.refresh();
+      })
+      .catch(function(err){
+        /* 検索失敗時の処理 */
+        $('body').trigger('ncmbError', [err, 'loginComplete']);
+      });
 ```
 ]
 
