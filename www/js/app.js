@@ -197,6 +197,7 @@ ons.ready(function(){
 // Device ready
 document.addEventListener('deviceready', function(){
   navigator.splashscreen.hide(); // スプラッシュ画面を消す
+  navigator.accelerometer.watchAcceleration(function(){console.log('init success')}, this.onAcceError, this.accelerometerOptions);
 }, false);
 
 // ==================================
